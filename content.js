@@ -1,11 +1,11 @@
 function playClick() {
-  chrome.storage.local.get(["customSounds", "selectedSoundId"], (data) => {
+  chrome.runtime.sendMessage({ type: "getSoundSettings" }, (data) => {
     let soundPath;
     const customSounds = data.customSounds || [];
     const selectedSoundId = data.selectedSoundId || "default";
 
     if (selectedSoundId === "default") {
-      soundPath = chrome.runtime.getURL("sounds/click.mp3");
+      soundPath = chrome.runtime.getURL("sounds/click.wav");
     } else {
       const index = parseInt(selectedSoundId.replace("custom-", ""), 10);
       if (customSounds[index]) {
@@ -17,7 +17,7 @@ function playClick() {
 
     const audio = new Audio(soundPath);
     audio.volume = 0.5;
-    audio.play().catch(() => {});
+    audio.play().catch((err) => console.error("Play failed:", err));
   });
 }
 

@@ -15,7 +15,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["sounds/click.mp3"],
+      "resources": ["sounds/click.wav"],
       "matches": ["<all_urls>"]
     }
   ]
